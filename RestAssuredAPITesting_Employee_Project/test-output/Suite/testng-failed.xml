@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <test thread-count="5" name="Test">
+    <classes>
+      <class name="employee.testcases.TC003_Post_Employee"/>
+      <class name="employee.testcases.TC005_Delete_Employee_Record"/>
+      <class name="employee.testcases.TC002_Get_Single_Employees_Record"/>
+      <class name="employee.testcases.TC004_Put_Employee_Record"/>
+      <class name="employee.testcases.TC001_Get_All_Employees"/>
+    </classes>
+  </test> <!-- Test -->
+  <test name="Test(failed)">
+    <classes>
+      <class name="employee.testcases.TC004_Put_Employee_Record">
+        <methods>
+          <include name="checkContentType"/>
+          <include name="checkStatusLine"/>
+          <include name="checkResponseBody"/>
+          <include name="putEmployee"/>
+          <include name="tearDown"/>
+          <include name="checkStatusCode"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- employee.testcases.TC004_Put_Employee_Record -->
+      <class name="employee.testcases.TC001_Get_All_Employees">
+        <methods>
+          <include name="checkStatusCode"/>
+          <include name="checkContentType"/>
+          <include name="checkStatusLine"/>
+          <include name="setup"/>
+          <include name="getAllEmployees"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- employee.testcases.TC001_Get_All_Employees -->
+      <class name="employee.testcases.TC002_Get_Single_Employees_Record">
+        <methods>
+          <include name="getSingleEmployees"/>
+          <include name="setup"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- employee.testcases.TC002_Get_Single_Employees_Record -->
+      <class name="employee.testcases.TC005_Delete_Employee_Record">
+        <methods>
+          <include name="checkcontentlength"/>
+          <include name="checkContentType"/>
+          <include name="checkStatusCode"/>
+          <include name="tearDown"/>
+          <include name="deleteEmployee"/>
+          <include name="checkResponseBody"/>
+          <include name="setup"/>
+          <include name="checkStatusLine"/>
+        </methods>
+      </class> <!-- employee.testcases.TC005_Delete_Employee_Record -->
+      <class name="employee.testcases.TC003_Post_Employee">
+        <methods>
+          <include name="postEmployee"/>
+          <include name="checkStatusCode"/>
+          <include name="checkResponseBody"/>
+          <include name="checkStatusLine"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+          <include name="checkContentType"/>
+        </methods>
+      </class> <!-- employee.testcases.TC003_Post_Employee -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->
