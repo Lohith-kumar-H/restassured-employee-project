@@ -4,19 +4,19 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 public class RestUtils
 {
-	public static String ename()
+	public static String fname()
 	{
 		String genratedstring=RandomStringUtils.randomAlphabetic(1);
 		return("lohi"+genratedstring);
 	}
 	
-	public static String esal()
+	public static String  lname()
 	{
-		String genratedstring=RandomStringUtils.randomNumeric(5);
+		String genratedstring=RandomStringUtils.randomAlphabetic(5);
 		return(genratedstring);
 	}
 	
-	public static String eage()
+	public static String sid()
 	{
 		String genratedstring=RandomStringUtils.randomNumeric(2);
 		return(genratedstring);

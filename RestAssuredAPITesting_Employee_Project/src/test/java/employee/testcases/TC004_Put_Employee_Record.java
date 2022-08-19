@@ -18,23 +18,23 @@ public class TC004_Put_Employee_Record extends TestBase
 	RequestSpecification httpRequest;
 	Response response;
 	
-	String ename=RestUtils.ename();
-	String esal=RestUtils.esal();
-	String eage=RestUtils.eage();
+	String firstName=RestUtils.fname();
+	String lastName=RestUtils.lname();
+	String studentId=RestUtils.sid();
 	
 	@BeforeClass
 	void putEmployee() throws InterruptedException
 	{
 		logger.info("*****started TC004_Put_Employees_Record*****" );
-		RestAssured.baseURI="http://dummy.restapiexample.com/api/v1";
+		RestAssured.baseURI="http://localhost:3000";//"http://dummy.restapiexample.com/api/v1";
 		httpRequest=RestAssured.given();
 		
 		//json object is a class that represnt a simple json.we can add key-value pairs using the put method
 		JSONObject requestpara= new JSONObject();
 		  
-		   requestpara.put("name", "ename");
-		   requestpara.put("salary", "esal");
-		   requestpara.put("age", "eage");
+		   requestpara.put("firstName", "fname");
+		   requestpara.put("lastName", "lname");
+		   requestpara.put("studentId", "sid");
 		   
 		   //add a header stating  the request body is a  json
 		   httpRequest.header("Content-Type","application/json");
@@ -42,7 +42,7 @@ public class TC004_Put_Employee_Record extends TestBase
 		  
 		   httpRequest.body(requestpara.toJSONString());
 		
-		    response=httpRequest.request(Method.PUT,"/update/"+empID);
+		    response=httpRequest.request(Method.PUT,"/users/4");
 		    
 		    Thread.sleep(5000);
 	}
@@ -51,9 +51,9 @@ public class TC004_Put_Employee_Record extends TestBase
 	void checkResponseBody()
 	{
 		String responseBody=response.getBody().asString();
-		Assert.assertEquals(responseBody.contains(empID),true);
-		Assert.assertEquals(responseBody.contains(esal),true);
-		Assert.assertEquals(responseBody.contains(eage),true);
+		Assert.assertEquals(responseBody.contains("fname"),true);
+		Assert.assertEquals(responseBody.contains("lname"),true);
+		Assert.assertEquals(responseBody.contains("sid"),true);
 	}
 	
 	@Test
@@ -75,10 +75,10 @@ public class TC004_Put_Employee_Record extends TestBase
 	void checkContentType()
 	{
 		String contentType=response.header("content-Type");
-		Assert.assertEquals(contentType, "application/json");
+		Assert.assertEquals(contentType, "application/json; charset=utf-8");
 	}
 
-	@Test
+	//@Test
 	void checkServerType()
 	{
 		String server=response.header("Server");
@@ -86,7 +86,7 @@ public class TC004_Put_Employee_Record extends TestBase
 	}
 
 	
-	@Test
+	//@Test
 	void checkcontentEncoding()
 	{
 		String contentenc=response.header("Content-Encoding");

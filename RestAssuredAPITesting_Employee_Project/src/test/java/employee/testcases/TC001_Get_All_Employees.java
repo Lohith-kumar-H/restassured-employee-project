@@ -14,9 +14,9 @@ public class TC001_Get_All_Employees extends TestBase
 	void getAllEmployees() throws InterruptedException
 	{
 		logger.info("*****started TC001_Get_All_Employees*****" );
-		 RestAssured.baseURI=/*"http://localhost:8080/app";*/"http://dummy.restapiexample.com/api/v1";
+		 RestAssured.baseURI="http://localhost:8080/app";//"http://dummy.restapiexample.com/api/v1";
 		 httpRequest=RestAssured.given();
-		 response=httpRequest.request(Method.GET,"/employees");
+		 response=httpRequest.request(Method.GET,"/videogames");
 		 
 		 Thread.sleep(3);
 		
@@ -63,7 +63,7 @@ public class TC001_Get_All_Employees extends TestBase
 		
 		String statusLine=response.getStatusLine();
 		logger.info("status line is ==>"+statusLine);
-		Assert.assertEquals(statusLine, "HTTP/1.1 200 OK");
+		Assert.assertEquals(statusLine, "HTTP/1.1 200 ");
 		
 	}
 	
@@ -74,10 +74,10 @@ public class TC001_Get_All_Employees extends TestBase
 		
 		String contentType=response.header("content-Type");
 		logger.info("content-Type is ==>"+contentType);
-		Assert.assertEquals(contentType, "application/json");
+		Assert.assertEquals(contentType, "application/xml");
 	}
 	
-	@Test
+	//@Test
 	void checkServerType()
 	{
 		logger.info("***check Server type**");
@@ -87,7 +87,7 @@ public class TC001_Get_All_Employees extends TestBase
 		Assert.assertEquals(server, "nginx");
 	}
 	
-	@Test
+	//@Test
 	void checkcontentEncoding()
 	{
 		logger.info("***check content encoding***");

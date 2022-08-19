@@ -22,9 +22,9 @@ public class TC002_Get_Single_Employees_Record extends TestBase
 	void getSingleEmployees() throws InterruptedException
 	{
 		logger.info("*****started TC002_Get_Single_Employees_Record*****" );
-		RestAssured.baseURI="http://dummy.restapiexample.com/api/v1";
+		RestAssured.baseURI="http://localhost:8080/app";//"http://dummy.restapiexample.com/api/v1";
 		httpRequest=RestAssured.given();
-		response=httpRequest.request(Method.GET,"/employee/"+empID);
+		response=httpRequest.request(Method.GET,"/videogames/"+empID);
 
 		Thread.sleep(3000);
 
@@ -34,7 +34,7 @@ public class TC002_Get_Single_Employees_Record extends TestBase
 	void checkResponseBody()
 	{
 		String responseBody=response.getBody().asString();
-		Assert.assertEquals(responseBody.contains("success"),true);
+		Assert.assertEquals(responseBody.contains("Doom"),true);
 	}
 
 	@Test
@@ -53,17 +53,17 @@ public class TC002_Get_Single_Employees_Record extends TestBase
 	void checkStatusLine()
 	{
 		String statusLine=response.getStatusLine();
-		Assert.assertEquals(statusLine, "HTTP/1.1 200 OK");
+		Assert.assertEquals(statusLine, "HTTP/1.1 200 ");
 
 	}
 	@Test
 	void checkContentType()
 	{
 		String contentType=response.header("content-Type");
-		Assert.assertEquals(contentType, "application/json");
+		Assert.assertEquals(contentType, "application/xml");
 	}
 
-	@Test
+	//@Test
 	void checkServerType()
 	{
 		String server=response.header("Server");

@@ -8,10 +8,12 @@ import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 public class UpoladinngImage 
 {
-	@Test
+	//@Test
 	public void uploadImageFile()
 	{
 		RestAssured.baseURI="https://petstore.swagger.io";
@@ -23,5 +25,17 @@ public class UpoladinngImage
 	System.out.println(re.statusCode());
 	System.out.println(re.asPrettyString());
 	}
+	
+	//@Test
+public void download() throws IOException{
+			
+		Response response=	RestAssured.given().when().get("https://reqres.in/api/users").andReturn();
+			
+			byte[] bytes=response.getBody().asByteArray();
+			File file= new File( "/users/promode.json");
+		     Files.write(file.toPath(), bytes);
+		}
+		
+	}
 
-}
+

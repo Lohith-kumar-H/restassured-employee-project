@@ -18,23 +18,29 @@ public class TC003_Post_Employee extends TestBase
 	RequestSpecification httpRequest;
 	Response response;
 	
-	String ename=RestUtils.ename();
-	String esal=RestUtils.esal();
-	String eage=RestUtils.eage();
+	String firstName=RestUtils.fname();
+	String lastName=RestUtils.lname();
+	String studentId=RestUtils.sid();
 	
 	@BeforeClass
 	void postEmployee() throws InterruptedException
 	{
 		logger.info("*****started TC003_Post_Employees_Record*****" );
-		RestAssured.baseURI="http://dummy.restapiexample.com/api/v1";
+		RestAssured.baseURI="http://localhost:3000";//"http://dummy.restapiexample.com/api/v1";
 		httpRequest=RestAssured.given();
 		
 		//json object is a class that represnt a simple json.we can add key-value pairs using the put method
 		JSONObject requestpara= new JSONObject();
 		  
-		   requestpara.put("name", "ename");
-		   requestpara.put("salary", "esal");
-		   requestpara.put("age", "eage");
+		/*data.put("id","60");
+		data.put("name", "pubg");
+		data.put("releaseDate", "2020-08-20T08:45:55.520Z");
+		data.put("reviewScore", "6");
+		data.put("category", "Battle");
+		data.put("rating", "universal");*/
+		   requestpara.put("firstName", "fname");
+		   requestpara.put("lastName", "lname");
+		   requestpara.put("studentId", "sid");
 		   
 		   //add a header stating  the request body is a  json
 		   httpRequest.header("Content-Type","application/json");
@@ -42,7 +48,7 @@ public class TC003_Post_Employee extends TestBase
 		  
 		   httpRequest.body(requestpara.toJSONString());
 		
-		    response=httpRequest.request(Method.POST,"/create");
+		    response=httpRequest.request(Method.POST,"/users");
 		    
 		    Thread.sleep(5000);
 	}
@@ -50,24 +56,27 @@ public class TC003_Post_Employee extends TestBase
 	@Test
 	void checkResponseBody()
 	{
-		String responseBody=response.getBody().asString();
-		Assert.assertEquals(responseBody.contains(ename),true);
-		Assert.assertEquals(responseBody.contains(esal),true);
-		Assert.assertEquals(responseBody.contains(eage),true);
+		
+	String responseBody=response.getBody().asString();
+		//System.out.println(response.getBody().asString());
+		Assert.assertEquals(responseBody.contains("fname"),true);
+		Assert.assertEquals(responseBody.contains("lname"),true);
+		Assert.assertEquals(responseBody.contains("sid"),true);
+		//System.out.println(responseBody);
 	}
 	
 	@Test
 	void checkStatusCode()
 	{
 		int statuscode=response.getStatusCode();
-		Assert.assertEquals(statuscode, 200);
+		Assert.assertEquals(statuscode, 201);
 	}
 	
 	@Test
 	void checkStatusLine()
 	{
 		String statusLine=response.getStatusLine();
-		Assert.assertEquals(statusLine, "HTTP/1.1 200 OK");
+		Assert.assertEquals(statusLine, "HTTP/1.1 201 Created");
 
 	}
 	
@@ -75,10 +84,10 @@ public class TC003_Post_Employee extends TestBase
 	void checkContentType()
 	{
 		String contentType=response.header("content-Type");
-		Assert.assertEquals(contentType, "application/json");
+		Assert.assertEquals(contentType, "application/json; charset=utf-8");
 	}
 
-	@Test
+	//@Test
 	void checkServerType()
 	{
 		String server=response.header("Server");
@@ -86,7 +95,7 @@ public class TC003_Post_Employee extends TestBase
 	}
 
 	
-	@Test
+	//@Test
 	void checkcontentEncoding()
 	{
 		String contentenc=response.header("Content-Encoding");
